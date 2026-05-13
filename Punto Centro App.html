@@ -3541,29 +3541,27 @@ html, body {
   const notifPermBtn = document.getElementById('notifPermBtn');
 
   function mostrarPrompt(){
-    if(!('Notification' in window)) return;
-    if(Notification.permission === 'default' && notifPrompt){
+    if(!notifPrompt) return;
+    // Mostrar siempre salvo que ya esté concedido o denegado
+    const perm = ('Notification' in window) ? Notification.permission : 'default';
+    if(perm !== 'granted' && perm !== 'denied'){
       notifPrompt.style.display = 'flex';
     }
   }
 
   function activarNotificaciones(){
-    if(!('Notification' in window)) return;
+    if(!notifPrompt) return;
+    if(!('Notification' in window)){
+      // iOS Safari sin instalar: mostrar instrucciones
+      alert('Para activar notificaciones:\n1. Abrí esta app en Safari\n2. Tocá Compartir ⬆\n3. Seleccioná "Agregar a pantalla de inicio"\n4. Abrí la app desde tu pantalla de inicio');
+      return;
+    }
     Notification.requestPermission().then(perm=>{
-      if(notifPrompt) notifPrompt.style.display = 'none';
+      notifPrompt.style.display = 'none';
       if(perm === 'granted'){
-        setTimeout(()=>dispararNotifReal(
-          'Notificaciones activadas ✅',
-          'Te avisaremos de clases, racha y pagos.'
-        ), 500);
-        setTimeout(()=>dispararNotifReal(
-          'Tu clase empieza en 30 min 💪',
-          'Funcional · 18:10 hs · Quedan 4 lugares'
-        ), 4000);
-        setTimeout(()=>dispararNotifReal(
-          '¡Racha en peligro! 🔥',
-          'No entrenaste hoy. Completá tu rutina para mantener los 23 días.'
-        ), 9000);
+        setTimeout(()=>dispararNotifReal('Notificaciones activadas ✅','Te avisaremos de clases, racha y pagos.'), 500);
+        setTimeout(()=>dispararNotifReal('Tu clase empieza en 30 min 💪','Funcional · 18:10 hs · Quedan 4 lugares'), 4000);
+        setTimeout(()=>dispararNotifReal('¡Racha en peligro! 🔥','No entrenaste hoy. Completá tu rutina para mantener los 23 días.'), 9000);
       }
     });
   }
@@ -3571,18 +3569,13 @@ html, body {
   if(notifPermBtn) notifPermBtn.addEventListener('click', activarNotificaciones);
 
   if('serviceWorker' in navigator){
-    navigator.serviceWorker.register('sw.js').then(reg=>{
-      swReg = reg;
-      mostrarPrompt();
-    }).catch(()=>mostrarPrompt());
-  } else {
-    mostrarPrompt();
+    navigator.serviceWorker.register('sw.js').then(reg=>{ swReg = reg; }).catch(()=>{});
   }
 
-  // En desktop sin permiso: banner visual de demo igual
-  if(!esCelular && (!('Notification' in window) || Notification.permission !== 'granted')){
-    setTimeout(()=>showPush('Tu clase empieza en 30 min','Funcional · 18:10 hs · Quedan 4 lugares','ahora'), 4000);
-  }
+  mostrarPrompt();
+
+  // Desktop: banner visual de demo
+  if(!esCelular) setTimeout(()=>showPush('Tu clase empieza en 30 min','Funcional · 18:10 hs · Quedan 4 lugares','ahora'), 4000);
 
   // ===== NOTIFICATIONS PANEL =====
   const bellBtn = document.getElementById('bellBtn');
