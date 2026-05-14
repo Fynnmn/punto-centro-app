@@ -1712,8 +1712,8 @@
     background:var(--ring-lbl-bg,rgba(10,10,10,.4)) !important;
     backdrop-filter:var(--ring-lbl-blur,blur(2px)) !important;
     -webkit-backdrop-filter:var(--ring-lbl-blur,blur(2px)) !important;
-    padding:3px 10px;
-    border-radius:999px;
+    padding:var(--ring-lbl-padding,3px 10px) !important;
+    border-radius:var(--ring-lbl-radius,999px) !important;
     display:inline-block;
   }
   .racha-tagline{
@@ -2336,9 +2336,11 @@ html, body {
   --pills-bg:#E8E8EA;
   --pills-border:#DCDCDE;
   --ring-lbl-bg:transparent;
-  --ring-lbl-color:#5A5A5A;
+  --ring-lbl-color:#6A6A6A;
   --ring-lbl-shadow:none;
   --ring-lbl-blur:none;
+  --ring-lbl-padding:2px 0;
+  --ring-lbl-radius:0;
   --stat-cell-bg:#fff;
   --stat-cell-border:#E0E0E2;
   --mini-stat-bg:#fff;
@@ -2349,7 +2351,7 @@ html, body {
   --bell-bg:#fff;
   --bell-border:#E0E0E2;
   --bell-color:#3A3A3A;
-  --ring-track:rgba(0,0,0,.08);
+  --ring-track:#E2DBD0;
 }
 .light .iphone-screen,.light .app,.light .phone{background:var(--bg)!important}
 .light .card,.light .today-card,.light .quick,.light .modal-box,.light .due-alert,.light .stats-card{background:var(--surface)!important;border-color:var(--border)!important}
