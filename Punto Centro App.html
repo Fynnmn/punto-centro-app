@@ -1027,10 +1027,10 @@
   .hero-bell{
     position:relative;
     width:40px;height:40px;
-    background:#141414;
-    border:1px solid #1F1F1F;
+    background:var(--bell-bg,#141414);
+    border:1px solid var(--bell-border,#1F1F1F);
     border-radius:12px;
-    color:#fff;
+    color:var(--bell-color,#fff);
     cursor:pointer;
     display:flex;align-items:center;justify-content:center;
     transition:border-color .2s ease,background .2s ease;
@@ -2347,6 +2347,10 @@ html, body {
   --due-alert-bg:#FFF8F0;
   --due-alert-border:rgba(245,166,35,.25);
   --due-icon-bg:#FEF3DC;
+  --bell-bg:#fff;
+  --bell-border:#E0E0E2;
+  --bell-color:#3A3A3A;
+  --ring-track:rgba(0,0,0,.08);
 }
 .light .iphone-screen,.light .app,.light .phone{background:var(--bg)!important}
 .light .card,.light .today-card,.light .quick,.light .modal-box,.light .due-alert,.light .stats-card{background:var(--surface)!important;border-color:var(--border)!important}
@@ -4193,13 +4197,13 @@ html, body {
     document.querySelectorAll('.notif-overlay,.hist-overlay').forEach(el=>el.classList.toggle('light',isLight));
     // Direct JS overrides for stubborn dark elements
     const ringTrack = document.querySelector('.ring-track');
-    if(ringTrack) ringTrack.setAttribute('stroke', isLight ? '#DCDCDE' : '#1F1F1F');
+    if(ringTrack) ringTrack.setAttribute('stroke', isLight ? 'rgba(0,0,0,.09)' : '#1F1F1F');
     const ringLbl = document.querySelector('.racha-ring-lbl');
     if(ringLbl){
-      ringLbl.style.background = isLight ? 'rgba(0,0,0,.06)' : 'rgba(10,10,10,.4)';
+      ringLbl.style.background = isLight ? 'transparent' : 'rgba(10,10,10,.4)';
       ringLbl.style.backdropFilter = isLight ? 'none' : 'blur(2px)';
       ringLbl.style.webkitBackdropFilter = isLight ? 'none' : 'blur(2px)';
-      ringLbl.style.color = isLight ? '#3A3A3A' : '#fff';
+      ringLbl.style.color = isLight ? '#6A6A6A' : '#fff';
       ringLbl.style.textShadow = isLight ? 'none' : '0 1px 8px rgba(0,0,0,.7),0 1px 3px rgba(0,0,0,.9)';
     }
     document.querySelectorAll('.cal').forEach(el=>{
