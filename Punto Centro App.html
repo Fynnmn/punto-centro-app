@@ -2567,6 +2567,77 @@ html, body {
 .theme-toggle:active{transform:scale(.94)}
 .theme-toggle svg{width:16px;height:16px}
 
+/* ===== LIGHT MODE — MODAL ===== */
+.light .modal-inner{background:#F8F8FA;border-color:#E0E0E2}
+.light .modal-header{border-color:#E8E8EA;background:#F8F8FA}
+.light .modal-close{background:#EBEBED;border-color:#E0E0E2;color:#3A3A3A}
+.light .modal-title{color:#0A0A0A}
+.light .modal-body{background:#F8F8FA}
+
+/* ===== LIGHT MODE — PLANES MODAL ===== */
+.light .plan-opt{background:#fff;border-color:#E0E0E2}
+.light .plan-opt:hover,.light .plan-opt.selected{border-color:#F5A623;background:#FFFBF5}
+.light .plan-opt.active-plan{border-color:#F5A623;background:#FFFBF5}
+.light .plan-opt-name{color:#0A0A0A}
+.light .plan-opt-desc{color:#6A6A6A}
+.light .plan-opt-price span{color:#9A9A9A}
+.light .plan-inc-list{color:#6A6A6A}
+.light .plan-inc-list li{color:#6A6A6A}
+
+/* ===== LIGHT MODE — PERFIL ===== */
+.light .opt-list{background:#fff;border-color:#E0E0E2}
+.light .opt{border-bottom-color:#EBEBED}
+.light .opt:hover{background:#F5F5F7}
+.light .opt-icon{background:#EBEBED}
+.light .opt-icon svg{stroke:#3A3A3A}
+.light .opt-text{color:#0A0A0A}
+.light .opt-chev{color:#BBBBBD}
+.light .plan-card{background:#fff;border-color:#E0E0E2}
+.light .plan-name{color:#0A0A0A}
+.light .plan-price{color:#9A9A9A}
+.light .profile-name{color:#0A0A0A}
+.light .profile-id{color:#9A9A9A}
+.light .opt.danger .opt-icon{background:rgba(230,57,70,.07)}
+
+/* ===== LIGHT MODE — CALENDARIO ===== */
+.light .cal-day{background:#fff;border-color:#E8E8EA;color:#0A0A0A}
+.light .cal-day.empty{background:transparent;border-color:transparent}
+.light .cal-day.on{background:#F5A623;border-color:#F5A623;color:#0A0A0A}
+.light .cal-day.today{border-color:#F5A623;color:#F5A623;background:#FFFBF0}
+.light .cal-day.on.today{background:#F5A623;color:#0A0A0A}
+.light .cal-dow{color:#9A9A9A}
+.light .cal-head{color:#0A0A0A}
+.light .cal-nav button{background:#EBEBED;border-color:#E0E0E2;color:#3A3A3A}
+.light .cal-nav button:hover{background:#E0E0E2;color:#0A0A0A}
+.light .cal-legend{color:#9A9A9A}
+.light .cal-legend .dot{background:#EBEBED;border-color:#E0E0E2}
+.light .cal-legend .dot-on{background:#F5A623;border-color:#F5A623;box-shadow:none}
+.light .cal-legend .dot-today{border-color:#F5A623;background:#FFFBF0}
+
+/* ===== LIGHT MODE — CLASES / RACHA MISC ===== */
+.light .slot-card,.light .clase-card{background:#fff;border-color:#E0E0E2}
+.light .slot-hora{color:#0A0A0A}
+.light .slot-nombre{color:#0A0A0A}
+.light .slot-info{color:#9A9A9A}
+.light .page-header{background:#F0F0F2}
+.light .stats-val{color:#0A0A0A}
+.light .stats-lbl{color:#9A9A9A}
+.light .stats-card{border-color:#E0E0E2}
+.light .reward-v2,.light .racha-next{background:#fff;border-color:#E0E0E2}
+.light .reward-v2-title,.light .racha-next-title{color:#0A0A0A}
+.light .reward-v2-sub,.light .racha-next-sub{color:#9A9A9A}
+.light .reward-bar-bg{background:#E8E8EA}
+.light .due-alert{background:#FFF8F0;border-color:rgba(245,166,35,.3)}
+.light .section-header{background:#F0F0F2}
+.light .add-btn{background:#fff!important;border-color:#E0E0E2!important}
+.light .input-field,.light input,.light select,.light textarea{background:#fff;border-color:#E0E0E2;color:#0A0A0A}
+.light .form-label{color:#6A6A6A}
+.light .routine-card{background:#fff;border-color:#E0E0E2}
+.light .racha-big{color:#0A0A0A}
+.light .racha-label{color:#9A9A9A}
+.light .comodin-card{background:#fff;border-color:#E0E0E2}
+.light .modal-box,.light .training-header{background:#F8F8FA;border-color:#E0E0E2}
+
 /* ===== SPLASH SCREEN ===== */
 #splash{
   position:fixed !important;
@@ -3632,32 +3703,185 @@ html, body {
 </div>
 
 <!-- PLANES MODAL -->
+<style>
+.planes-intro{font-size:12px;color:#666;margin-bottom:4px;line-height:1.5}
+.light .planes-intro{color:#9A9A9A}
+.plan-opt{
+  background:#141414;border:1px solid #1F1F1F;border-radius:14px;
+  padding:0;cursor:pointer;transition:border-color .18s,background .18s;overflow:hidden;
+  display:flex;flex-direction:column;
+}
+.plan-opt:hover,.plan-opt.selected{border-color:#F5A623}
+.plan-opt.active-plan{border-color:#F5A623;cursor:default}
+.plan-opt-inner{padding:14px 16px;flex:1}
+.plan-opt-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:4px}
+.plan-opt-badge{
+  display:inline-flex;align-items:center;
+  background:#F5A623;color:#0A0A0A;
+  font-size:9px;font-weight:800;letter-spacing:.08em;border-radius:5px;
+  padding:2px 7px;text-transform:uppercase;flex-shrink:0;
+}
+.plan-opt-price-wrap{text-align:right;flex-shrink:0}
+.plan-opt-price{
+  font-family:'Barlow Condensed',sans-serif;font-style:italic;font-weight:700;
+  font-size:26px;color:#F5A623;line-height:1;letter-spacing:-.01em;
+}
+.plan-opt-price sup{font-size:14px;vertical-align:top;margin-top:3px;display:inline-block}
+.plan-opt-price sub{font-size:11px;font-weight:400;color:#555;font-family:'Inter',sans-serif;font-style:normal;letter-spacing:0}
+.plan-opt-name{font-size:14px;font-weight:700;color:#fff;margin-bottom:3px;letter-spacing:-.01em}
+.plan-opt-desc{font-size:11px;color:#666;line-height:1.4}
+.plan-opt-footer{
+  padding:8px 16px;
+  border-top:1px solid #1F1F1F;
+  font-size:10px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;
+  color:#555;display:flex;align-items:center;gap:6px;
+}
+.light .plan-opt-footer{border-color:#EBEBED;color:#9A9A9A}
+.plan-opt-footer-icon{font-size:12px}
+.plan-opt.active-plan .plan-opt-footer{color:#F5A623}
+</style>
 <div class="modal" id="planesModal">
-  <div class="modal-inner" style="max-height:80vh;overflow-y:auto">
-    <header class="modal-header">
+  <div class="modal-inner" style="max-height:88vh;overflow-y:auto;border-radius:20px">
+    <header class="modal-header" style="position:sticky;top:0;z-index:5">
       <button class="modal-close" id="planesClose">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
       </button>
-      <div class="modal-title">Elegir plan</div>
+      <div class="modal-title">Planes y precios</div>
       <div style="width:36px"></div>
     </header>
-    <div class="modal-body" style="gap:12px">
+    <div class="modal-body" style="display:flex;flex-direction:column;gap:10px;padding-top:4px">
+      <p class="planes-intro">Todos los planes incluyen acceso al sistema de rachas y la app. Cambiá de plan en cualquier momento.</p>
+
+      <!-- 1. FUNCIONAL -->
+      <div class="plan-opt" onclick="selectPlan(this,'Funcional','$1.000')">
+        <div class="plan-opt-inner">
+          <div class="plan-opt-top">
+            <div>
+              <div class="plan-opt-name">Funcional</div>
+              <div class="plan-opt-desc">Clases L/M/V · 4 horarios disponibles</div>
+            </div>
+            <div class="plan-opt-price-wrap">
+              <div class="plan-opt-price"><sup>$</sup>1.000<sub>/mes</sub></div>
+            </div>
+          </div>
+        </div>
+        <div class="plan-opt-footer"><span class="plan-opt-footer-icon">🕐</span> 07:10 · 08:10 · 18:10 · 20:10</div>
+      </div>
+
+      <!-- 2. MUSCULACIÓN 3X -->
+      <div class="plan-opt" onclick="selectPlan(this,'Musculación 3x Semana','$1.100')">
+        <div class="plan-opt-inner">
+          <div class="plan-opt-top">
+            <div>
+              <div class="plan-opt-name">Musculación 3x Semana</div>
+              <div class="plan-opt-desc">Sala de musculación · 3 días por semana</div>
+            </div>
+            <div class="plan-opt-price-wrap">
+              <div class="plan-opt-price"><sup>$</sup>1.100<sub>/mes</sub></div>
+            </div>
+          </div>
+        </div>
+        <div class="plan-opt-footer"><span class="plan-opt-footer-icon">💪</span> 3 días/semana · Sala libre</div>
+      </div>
+
+      <!-- 3. MUSCULACIÓN 24HS -->
+      <div class="plan-opt" onclick="selectPlan(this,'Musculación 24hs','$1.400')">
+        <div class="plan-opt-inner">
+          <div class="plan-opt-top">
+            <div>
+              <div class="plan-opt-name">Musculación 24hs</div>
+              <div class="plan-opt-desc">Sala de musculación todos los días · Acceso 24 horas</div>
+            </div>
+            <div class="plan-opt-price-wrap">
+              <div class="plan-opt-price"><sup>$</sup>1.400<sub>/mes</sub></div>
+            </div>
+          </div>
+        </div>
+        <div class="plan-opt-footer"><span class="plan-opt-footer-icon">🔓</span> Acceso 24hs · Reconocimiento facial</div>
+      </div>
+
+      <!-- 4. GAP + FUNCIONAL -->
+      <div class="plan-opt" onclick="selectPlan(this,'GAP + Funcional','$1.500')">
+        <div class="plan-opt-inner">
+          <div class="plan-opt-top">
+            <div>
+              <div class="plan-opt-name">GAP + Funcional</div>
+              <div class="plan-opt-desc">Clases de GAP y Funcional combinadas · L/M/V</div>
+            </div>
+            <div class="plan-opt-price-wrap">
+              <div class="plan-opt-price"><sup>$</sup>1.500<sub>/mes</sub></div>
+            </div>
+          </div>
+        </div>
+        <div class="plan-opt-footer"><span class="plan-opt-footer-icon">🏃</span> Funcional + GAP incluidos</div>
+      </div>
+
+      <!-- 5. ENTRENAMIENTO DEPORTIVO -->
+      <div class="plan-opt" onclick="selectPlan(this,'Entrenamiento Deportivo','$1.600')">
+        <div class="plan-opt-inner">
+          <div class="plan-opt-top">
+            <div>
+              <div class="plan-opt-name">Entrenamiento Deportivo</div>
+              <div class="plan-opt-desc">Plan deportivo dirigido · Con profesor</div>
+            </div>
+            <div class="plan-opt-price-wrap">
+              <div class="plan-opt-price"><sup>$</sup>1.600<sub>/mes</sub></div>
+            </div>
+          </div>
+        </div>
+        <div class="plan-opt-footer"><span class="plan-opt-footer-icon">🏅</span> Dirigido · Plan a medida deportivo</div>
+      </div>
+
+      <!-- 6. MUSCULACIÓN + FUNCIONAL/GAP -->
+      <div class="plan-opt" onclick="selectPlan(this,'Musculación + Funcional/GAP','$2.000')">
+        <div class="plan-opt-inner">
+          <div class="plan-opt-top">
+            <div>
+              <div class="plan-opt-name">Musculación + Funcional/GAP</div>
+              <div class="plan-opt-desc">Sala todos los días + clases de Funcional y GAP incluidas</div>
+            </div>
+            <div class="plan-opt-price-wrap">
+              <div class="plan-opt-price"><sup>$</sup>2.000<sub>/mes</sub></div>
+            </div>
+          </div>
+        </div>
+        <div class="plan-opt-footer"><span class="plan-opt-footer-icon">⚡</span> Sala 24hs + todas las clases</div>
+      </div>
+
+      <!-- 7. PASE LIBRE — ACTUAL -->
       <div class="plan-opt active-plan">
-        <div class="plan-opt-badge">ACTUAL</div>
-        <div class="plan-opt-name">Pase Libre</div>
-        <div class="plan-opt-desc">Acceso completo · Todas las modalidades · Sin límite de clases</div>
-        <div class="plan-opt-price">$2.400<span>/mes</span></div>
+        <div class="plan-opt-inner">
+          <div class="plan-opt-top">
+            <div>
+              <div style="margin-bottom:5px"><span class="plan-opt-badge">Tu plan actual</span></div>
+              <div class="plan-opt-name">Pase Libre</div>
+              <div class="plan-opt-desc">Acceso completo · Todas las modalidades sin límite</div>
+            </div>
+            <div class="plan-opt-price-wrap">
+              <div class="plan-opt-price"><sup>$</sup>2.400<sub>/mes</sub></div>
+            </div>
+          </div>
+        </div>
+        <div class="plan-opt-footer"><span class="plan-opt-footer-icon">🏆</span> Sala + todas las clases + 24hs</div>
       </div>
-      <div class="plan-opt" onclick="selectPlan(this,'Pase Diurno','$1.800')">
-        <div class="plan-opt-name">Pase Diurno</div>
-        <div class="plan-opt-desc">Acceso de lunes a viernes · Hasta las 18:00 hs</div>
-        <div class="plan-opt-price">$1.800<span>/mes</span></div>
+
+      <!-- 8. SEMIPERSONALIZADO -->
+      <div class="plan-opt" onclick="selectPlan(this,'Semipersonalizado','$2.700')">
+        <div class="plan-opt-inner">
+          <div class="plan-opt-top">
+            <div>
+              <div class="plan-opt-name">Semipersonalizado</div>
+              <div class="plan-opt-desc">Entrenamiento dirigido por profesor · Plan a medida · Seguimiento mensual</div>
+            </div>
+            <div class="plan-opt-price-wrap">
+              <div class="plan-opt-price"><sup>$</sup>2.700<sub>/mes</sub></div>
+            </div>
+          </div>
+        </div>
+        <div class="plan-opt-footer"><span class="plan-opt-footer-icon">👤</span> Plan personalizado · Con seguimiento</div>
       </div>
-      <div class="plan-opt" onclick="selectPlan(this,'Solo Clases','$1.400')">
-        <div class="plan-opt-name">Solo Clases</div>
-        <div class="plan-opt-desc">8 clases grupales por mes · Funcional y GAP</div>
-        <div class="plan-opt-price">$1.400<span>/mes</span></div>
-      </div>
+
+      <p style="font-size:11px;color:#555;text-align:center;padding-top:4px;line-height:1.5">Todos los precios en pesos uruguayos.<br>Consultá cambios de plan en el local o por WhatsApp.</p>
     </div>
   </div>
 </div>
@@ -3710,7 +3934,7 @@ html, body {
   const appRoot = document.querySelector('.iphone-screen');
   let isLight = localStorage.getItem('punto-theme') === 'light';
   function applyTheme(){
-    document.querySelectorAll('.iphone-screen,.push-banner,.notif-panel,.hist-sheet,.splash-sub,.splash-logo,.pbn-app,.pbn-title,.pbn-body-txt').forEach(el=>{
+    document.querySelectorAll('.iphone-screen,.push-banner,.notif-panel,.hist-sheet,.splash-sub,.splash-logo,.pbn-app,.pbn-title,.pbn-body-txt,.modal,.modal-inner,.modal-body,.modal-header').forEach(el=>{
       el.classList.toggle('light', isLight);
     });
     document.querySelector('.iphone-screen').classList.toggle('light', isLight);
@@ -4173,7 +4397,11 @@ html, body {
   // ===== PLANES MODAL =====
   const planesModal = document.getElementById('planesModal');
   const planesClose = document.getElementById('planesClose');
-  function openPlanes(){ planesModal.classList.add('active'); }
+  function openPlanes(){
+    planesModal.classList.add('active');
+    planesModal.querySelectorAll('.modal-inner,.modal-body,.modal-header').forEach(el=>el.classList.toggle('light',isLight));
+    if(isLight) planesModal.classList.add('light'); else planesModal.classList.remove('light');
+  }
   function closePlanes(){ planesModal.classList.remove('active'); }
   planesClose?.addEventListener('click', closePlanes);
   planesModal?.addEventListener('click', e=>{ if(e.target===planesModal) closePlanes(); });
