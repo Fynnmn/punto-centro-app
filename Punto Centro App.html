@@ -2184,6 +2184,46 @@ html, body {
 
 /* h1 spacing handled in .page-title and .page-head */
 
+/* ===== GLOBAL TOAST ===== */
+.global-toast{
+  position:fixed;bottom:100px;left:50%;transform:translateX(-50%) translateY(20px);
+  background:#1F1F1F;border:1px solid #333;border-radius:12px;
+  padding:11px 18px;font-size:13px;font-weight:500;color:#fff;
+  white-space:nowrap;z-index:99999;opacity:0;
+  transition:opacity .25s,transform .25s;pointer-events:none;
+}
+.global-toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* ===== LOGROS ===== */
+.logro-card{
+  background:#141414;border:1px solid #1F1F1F;border-radius:14px;
+  padding:16px 14px;display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center;
+}
+.logro-card.done{border-color:#2A2A2A}
+.logro-card.locked{opacity:.45}
+.logro-icon{font-size:28px;line-height:1}
+.logro-t{font-size:12px;font-weight:700;color:#fff}
+.logro-s{font-size:11px;color:#555}
+.light .logro-card{background:#fff;border-color:#E0E0E2}
+.light .logro-t{color:#0A0A0A}
+
+/* ===== PLANES MODAL ===== */
+.plan-opt{
+  background:#141414;border:1px solid #1F1F1F;border-radius:14px;padding:16px;cursor:pointer;
+  transition:border-color .2s;
+}
+.plan-opt:hover,.plan-opt.selected{border-color:#F5A623}
+.plan-opt.active-plan{border-color:#262626;cursor:default}
+.plan-opt-badge{
+  display:inline-block;background:#F5A623;color:#0A0A0A;
+  font-size:10px;font-weight:700;letter-spacing:.06em;border-radius:6px;
+  padding:2px 8px;margin-bottom:6px;
+}
+.plan-opt-name{font-size:15px;font-weight:700;color:#fff;margin-bottom:4px}
+.plan-opt-desc{font-size:12px;color:#8A8A8A;margin-bottom:8px;line-height:1.4}
+.plan-opt-price{font-size:20px;font-weight:800;color:#F5A623;letter-spacing:-.02em}
+.plan-opt-price span{font-size:13px;font-weight:400;color:#555}
+
 /* ===== STATS STRIP ===== */
 .stats-strip{
   display:flex;align-items:center;
@@ -2909,8 +2949,35 @@ html, body {
           <div class="slot-time">20:10 — 21:00</div>
           <div class="slot-sub">15 lugares disponibles</div>
         </div>
-        <button class="btn btn-outline">Reservar</button>
+        <button class="btn btn-outline slot-reservar">Reservar</button>
       </div>
+
+      <!-- GAP CONTENT (hidden by default) -->
+      <div id="gap-content" style="display:none">
+        <div class="subtitle-gray">Martes / Jueves / Sábado</div>
+        <div class="card slot">
+          <div>
+            <div class="slot-time">09:00 — 09:50</div>
+            <div class="slot-sub">10 lugares disponibles</div>
+          </div>
+          <button class="btn btn-outline slot-reservar">Reservar</button>
+        </div>
+        <div class="card slot">
+          <div>
+            <div class="slot-time">10:00 — 10:50</div>
+            <div class="slot-sub">6 lugares disponibles</div>
+          </div>
+          <button class="btn btn-outline slot-reservar">Reservar</button>
+        </div>
+        <div class="card slot">
+          <div>
+            <div class="slot-time">19:00 — 19:50</div>
+            <div class="slot-sub">8 lugares disponibles</div>
+          </div>
+          <button class="btn btn-outline slot-reservar">Reservar</button>
+        </div>
+      </div>
+      <div id="funcional-content"><!-- funcional slots already above --></div>
     </section>
 
     <!-- ============ RACHA ============ -->
@@ -3541,6 +3608,63 @@ html, body {
   </div>
 </div>
 
+<!-- LOGROS SHEET -->
+<div class="hist-overlay" id="logrosOverlay">
+  <div class="hist-sheet">
+    <div class="hist-handle"></div>
+    <div class="hist-header">
+      <div class="hist-title">Mis logros</div>
+      <button class="hist-close" id="logrosClose">×</button>
+    </div>
+    <div class="hist-body" style="padding:16px 20px">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+        <div class="logro-card done"><div class="logro-icon">🔥</div><div class="logro-t">Primera semana</div><div class="logro-s">7 días seguidos</div></div>
+        <div class="logro-card done"><div class="logro-icon">💪</div><div class="logro-t">Dos semanas</div><div class="logro-s">14 días seguidos</div></div>
+        <div class="logro-card done"><div class="logro-icon">⚡</div><div class="logro-t">Madrugador</div><div class="logro-s">5 clases antes de 8am</div></div>
+        <div class="logro-card done"><div class="logro-icon">🏋️</div><div class="logro-t">Levantador</div><div class="logro-s">100kg en sentadilla</div></div>
+        <div class="logro-card done"><div class="logro-icon">🎯</div><div class="logro-t">Constante</div><div class="logro-s">20 días este mes</div></div>
+        <div class="logro-card locked"><div class="logro-icon" style="filter:grayscale(1)">🏆</div><div class="logro-t">Un mes completo</div><div class="logro-s">Faltan 7 días</div></div>
+        <div class="logro-card locked"><div class="logro-icon" style="filter:grayscale(1)">🚀</div><div class="logro-t">Élite</div><div class="logro-s">60 días seguidos</div></div>
+        <div class="logro-card locked"><div class="logro-icon" style="filter:grayscale(1)">👑</div><div class="logro-t">Leyenda</div><div class="logro-s">90 días seguidos</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PLANES MODAL -->
+<div class="modal" id="planesModal">
+  <div class="modal-inner" style="max-height:80vh;overflow-y:auto">
+    <header class="modal-header">
+      <button class="modal-close" id="planesClose">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+      <div class="modal-title">Elegir plan</div>
+      <div style="width:36px"></div>
+    </header>
+    <div class="modal-body" style="gap:12px">
+      <div class="plan-opt active-plan">
+        <div class="plan-opt-badge">ACTUAL</div>
+        <div class="plan-opt-name">Pase Libre</div>
+        <div class="plan-opt-desc">Acceso completo · Todas las modalidades · Sin límite de clases</div>
+        <div class="plan-opt-price">$2.400<span>/mes</span></div>
+      </div>
+      <div class="plan-opt" onclick="selectPlan(this,'Pase Diurno','$1.800')">
+        <div class="plan-opt-name">Pase Diurno</div>
+        <div class="plan-opt-desc">Acceso de lunes a viernes · Hasta las 18:00 hs</div>
+        <div class="plan-opt-price">$1.800<span>/mes</span></div>
+      </div>
+      <div class="plan-opt" onclick="selectPlan(this,'Solo Clases','$1.400')">
+        <div class="plan-opt-name">Solo Clases</div>
+        <div class="plan-opt-desc">8 clases grupales por mes · Funcional y GAP</div>
+        <div class="plan-opt-price">$1.400<span>/mes</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST GLOBAL -->
+<div id="globalToast" class="global-toast"></div>
+
 <script>
   // Pay modal
   const payModal = document.getElementById('payModal');
@@ -3809,6 +3933,292 @@ html, body {
       grid.appendChild(e);
     }
   })();
+
+  // ===== TOAST UTILITY =====
+  function toast(msg, dur=2400){
+    const t = document.getElementById('globalToast');
+    t.textContent = msg;
+    t.classList.add('show');
+    clearTimeout(t._t);
+    t._t = setTimeout(()=>t.classList.remove('show'), dur);
+  }
+
+  // ===== CLASES: RESERVAR BUTTONS =====
+  function setupSlotButtons(){
+    document.querySelectorAll('.slot-reservar').forEach(btn=>{
+      btn.addEventListener('click',()=>{
+        if(btn.classList.contains('reservado')) return;
+        const slot = btn.closest('.card.slot');
+        const time = slot?.querySelector('.slot-time')?.textContent || '';
+        const sub = slot?.querySelector('.slot-sub');
+        btn.textContent = 'RESERVADO ✓';
+        btn.classList.add('reservado');
+        btn.style.cssText = 'background:transparent;border:1px solid #2ECC71;color:#2ECC71;font-size:11px;font-weight:700;border-radius:8px;padding:8px 10px;cursor:default';
+        if(sub && !sub.style.color){
+          const spots = parseInt(sub.textContent) - 1;
+          if(!isNaN(spots)){
+            sub.textContent = spots > 0 ? `${spots} lugares disponibles` : 'Sin lugares';
+          }
+          sub.style.color = '#2ECC71';
+          sub.textContent = 'Tu lugar está confirmado';
+        }
+        toast(`✓ Lugar reservado · ${time}`);
+      });
+    });
+  }
+  // Wrap existing reservar buttons too
+  document.querySelectorAll('#screen-clases .btn-outline').forEach(btn=>{
+    btn.classList.add('slot-reservar');
+  });
+  setupSlotButtons();
+
+  // ===== CLASES: FUNCIONAL/GAP PILLS =====
+  const gapContent = document.getElementById('gap-content');
+  const funcionalSlots = document.querySelectorAll('#screen-clases .card.slot:not(#gap-content .card)');
+  const clasesDayLabel = document.querySelector('#screen-clases .subtitle-gray');
+  document.querySelectorAll('#screen-clases .pill').forEach(pill=>{
+    pill.addEventListener('click',()=>{
+      const isGap = pill.dataset.classTab === 'gap';
+      if(gapContent) gapContent.style.display = isGap ? 'block' : 'none';
+      funcionalSlots.forEach(s=>s.style.display = isGap ? 'none' : '');
+      if(clasesDayLabel) clasesDayLabel.textContent = isGap ? 'Martes / Jueves / Sábado' : 'Lunes / Miércoles / Viernes';
+      setupSlotButtons();
+    });
+  });
+
+  // ===== HOME: RESERVAR MI LUGAR → CLASES =====
+  document.querySelector('.today-card .btn-primary')?.addEventListener('click',()=>{
+    document.querySelector('[data-target="clases"]')?.click();
+  });
+
+  // ===== RACHA: CALENDAR NAVIGATION =====
+  let calYear = 2026, calMonth = 4; // 0-indexed: 4 = May
+  const monthNames = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+  const onDaysMap = { '2026-4': new Set([1,2,3,5,6,7,8,10,12,13,14,15,16,17,19,20,22,23,24,26,27,28,29,30]) };
+  const todayMap = { '2026-4': 30 };
+
+  function renderCalendar(){
+    const grid = document.getElementById('cal-grid');
+    const head = document.querySelector('.cal-head');
+    if(!grid||!head) return;
+    grid.innerHTML = '';
+    head.textContent = `${monthNames[calMonth]} ${calYear}`;
+    const dows = ['L','M','M','J','V','S','D'];
+    dows.forEach(d=>{ const e=document.createElement('div'); e.className='cal-dow'; e.textContent=d; grid.appendChild(e); });
+    const firstDay = new Date(calYear, calMonth, 1).getDay(); // 0=Sun
+    const leadingBlanks = (firstDay === 0) ? 6 : firstDay - 1;
+    const daysInMonth = new Date(calYear, calMonth+1, 0).getDate();
+    const key = `${calYear}-${calMonth}`;
+    const onDays = onDaysMap[key] || new Set();
+    const todayDay = todayMap[key] || null;
+    for(let i=0;i<leadingBlanks;i++){ const e=document.createElement('div'); e.className='cal-day empty'; grid.appendChild(e); }
+    for(let d=1;d<=daysInMonth;d++){
+      const e=document.createElement('div'); e.className='cal-day';
+      if(onDays.has(d)) e.classList.add('on');
+      if(d===todayDay) e.classList.add('today');
+      e.textContent=d; grid.appendChild(e);
+    }
+  }
+  document.querySelectorAll('.cal-nav button').forEach((btn,i)=>{
+    btn.addEventListener('click',()=>{
+      if(i===0){ calMonth--; if(calMonth<0){calMonth=11;calYear--;} }
+      else { calMonth++; if(calMonth>11){calMonth=0;calYear++;} }
+      renderCalendar();
+    });
+  });
+  renderCalendar();
+
+  // ===== RACHA: PAUSAR COMODIN =====
+  document.querySelector('.joker-btn')?.addEventListener('click',function(){
+    this.textContent='Comodín activado ✓';
+    this.disabled=true;
+    this.style.opacity='.6';
+    toast('🎯 Comodín activado — tu racha está protegida por 3 días');
+  });
+
+  // ===== RUTINAS: BOTÓN + → CREAR TAB =====
+  document.querySelector('.add-btn')?.addEventListener('click',()=>{
+    document.querySelector('[data-rt-tab="crear"]')?.click();
+  });
+
+  // ===== RUTINAS: EDITAR BUTTONS =====
+  document.querySelectorAll('.btn-secondary').forEach(btn=>{
+    if(btn.textContent.trim()==='Editar'){
+      btn.addEventListener('click',()=>{
+        const name = btn.closest('.card')?.querySelector('.routine-title')?.textContent || 'rutina';
+        toast(`✏️ Modo edición: ${name}`);
+      });
+    }
+  });
+
+  // ===== RUTINAS: CREAR FORM =====
+  document.querySelector('[data-rt-content="crear"] .btn-lg')?.addEventListener('click',function(){
+    const nameInput = document.querySelector('[data-rt-content="crear"] .form-input');
+    const name = nameInput?.value?.trim() || 'Nueva rutina';
+    if(!nameInput?.value?.trim()){ toast('⚠️ Escribí un nombre para la rutina'); nameInput?.focus(); return; }
+    toast(`✓ Rutina "${name}" creada`);
+    nameInput.value='';
+    setTimeout(()=>document.querySelector('[data-rt-tab="mis"]')?.click(), 800);
+  });
+
+  // ===== TRAINING MODAL: FULL INTERACTIVE =====
+  const exercises = [
+    {name:'Press de banca',muscle:'Pectoral · Tríceps · Deltoides',sets:[{kg:60,reps:12},{kg:60,reps:10},{kg:60,reps:10},{kg:60,reps:8}]},
+    {name:'Remo con barra',muscle:'Dorsal · Bíceps · Romboides',sets:[{kg:70,reps:10},{kg:70,reps:8},{kg:70,reps:8}]},
+    {name:'Press militar',muscle:'Deltoides · Tríceps',sets:[{kg:50,reps:12},{kg:50,reps:10},{kg:50,reps:10}]},
+    {name:'Fondos',muscle:'Pectoral · Tríceps',sets:[{kg:0,reps:12},{kg:0,reps:12},{kg:0,reps:10}]},
+    {name:'Curl de bíceps',muscle:'Bíceps · Braquial',sets:[{kg:20,reps:12},{kg:20,reps:12},{kg:20,reps:10}]},
+    {name:'Extensión tríceps',muscle:'Tríceps',sets:[{kg:30,reps:15},{kg:30,reps:12},{kg:30,reps:12}]},
+    {name:'Jalones al pecho',muscle:'Dorsal · Bíceps',sets:[{kg:55,reps:12},{kg:55,reps:10},{kg:55,reps:10}]},
+    {name:'Plancha abdominal',muscle:'Core · Abdominales',sets:[{kg:0,reps:'45s'},{kg:0,reps:'45s'},{kg:0,reps:'45s'}]},
+  ];
+  let curEx=0, curSet=0, restInterval=null;
+
+  function renderExercise(){
+    const ex = exercises[curEx];
+    const total = exercises.length;
+    document.querySelector('.exercise-name').textContent = ex.name;
+    document.querySelector('.exercise-muscle').textContent = ex.muscle;
+    document.querySelector('.label.label-orange').textContent = `Ejercicio ${curEx+1} de ${total}`;
+    document.querySelector('.exercise-progress-text').textContent = `${curEx} de ${total} ejercicios completados · ${Math.round(curEx/total*100)}%`;
+    document.querySelector('.exercise-progress-fill').style.width = `${(curEx/total)*100}%`;
+    const tbody = document.querySelector('.series-table');
+    const head = tbody.querySelector('.series-head');
+    tbody.innerHTML=''; tbody.appendChild(head);
+    ex.sets.forEach((s,i)=>{
+      const row = document.createElement('div');
+      row.className = 'series-row ' + (i<curSet?'done':i===curSet?'current':'pending');
+      if(i<curSet){
+        row.innerHTML=`<div class="series-num">${i+1}</div><div>${s.kg||'—'}</div><div>${s.reps}</div><div class="series-check">✓</div>`;
+      } else if(i===curSet){
+        row.innerHTML=`<div class="series-num">${i+1}</div><input type="number" value="${s.kg||0}" class="series-input"><input type="number" value="${s.reps}" class="series-input"><button class="series-action">✓</button>`;
+        row.querySelector('.series-action').addEventListener('click',completeSeries);
+      } else {
+        row.innerHTML=`<div class="series-num">${i+1}</div><div>—</div><div>—</div><div class="series-check pending">·</div>`;
+      }
+      tbody.appendChild(row);
+    });
+    stopRest();
+  }
+
+  function completeSeries(){
+    const ex=exercises[curEx];
+    curSet++;
+    if(curSet>=ex.sets.length){
+      toast(`✓ ${ex.name} completado`);
+      renderExercise();
+      startRest(60);
+    } else {
+      renderExercise();
+      startRest(90);
+    }
+  }
+
+  let restSecs=0;
+  function startRest(secs){
+    stopRest();
+    restSecs=secs;
+    const timeEl=document.querySelector('.rest-time');
+    const initBtn=document.querySelector('.rest-timer .btn-outline');
+    if(initBtn){ initBtn.textContent='Saltear'; initBtn.onclick=stopRest; }
+    restInterval=setInterval(()=>{
+      restSecs--;
+      const m=String(Math.floor(restSecs/60)).padStart(2,'0');
+      const s=String(restSecs%60).padStart(2,'0');
+      if(timeEl) timeEl.textContent=`${m}:${s}`;
+      if(restSecs<=0){
+        stopRest();
+        toast('¡Descansaste suficiente! Siguiente serie 💪');
+      }
+    },1000);
+  }
+  function stopRest(){
+    clearInterval(restInterval);
+    const timeEl=document.querySelector('.rest-time');
+    const initBtn=document.querySelector('.rest-timer .btn-outline');
+    if(timeEl) timeEl.textContent='01:30';
+    if(initBtn){ initBtn.textContent='Iniciar'; initBtn.onclick=()=>startRest(90); }
+  }
+
+  document.querySelector('.rest-timer .btn-outline')?.addEventListener('click',()=>startRest(90));
+
+  document.querySelector('#trainingModal .btn-primary.btn-lg')?.addEventListener('click',()=>{
+    const ex=exercises[curEx];
+    if(curSet<ex.sets.length){ toast('Completá todas las series primero'); return; }
+    curEx++; curSet=0;
+    if(curEx>=exercises.length){
+      toast('🏆 ¡Entrenamiento completado!', 3000);
+      setTimeout(closeModal,1500);
+      curEx=0;
+    } else {
+      renderExercise();
+    }
+  });
+
+  // Re-init modal on open
+  const origOpenModal = window._origOpen;
+  document.querySelectorAll('.start-training').forEach(btn=>{
+    btn.addEventListener('click',()=>{ curEx=0; curSet=0; setTimeout(renderExercise,50); });
+  });
+
+  // ===== LOGROS SHEET =====
+  const logrosOverlay = document.getElementById('logrosOverlay');
+  const logrosClose = document.getElementById('logrosClose');
+  function openLogros(){ logrosOverlay.classList.add('open'); if(isLight) logrosOverlay.classList.add('light'); else logrosOverlay.classList.remove('light'); }
+  function closeLogros(){ logrosOverlay.classList.remove('open'); }
+  logrosClose?.addEventListener('click', closeLogros);
+  logrosOverlay?.addEventListener('click', e=>{ if(e.target===logrosOverlay) closeLogros(); });
+  document.getElementById('quickLogros')?.addEventListener('click', openLogros);
+
+  // ===== PLANES MODAL =====
+  const planesModal = document.getElementById('planesModal');
+  const planesClose = document.getElementById('planesClose');
+  function openPlanes(){ planesModal.classList.add('active'); }
+  function closePlanes(){ planesModal.classList.remove('active'); }
+  planesClose?.addEventListener('click', closePlanes);
+  planesModal?.addEventListener('click', e=>{ if(e.target===planesModal) closePlanes(); });
+  document.querySelector('.pay-section .btn-secondary')?.addEventListener('click', openPlanes);
+  window.selectPlan = function(el, name, price){
+    document.querySelectorAll('.plan-opt').forEach(o=>o.classList.remove('selected'));
+    el.classList.add('selected');
+    toast(`Plan "${name}" seleccionado · ${price}/mes`);
+    setTimeout(closePlanes, 800);
+  };
+
+  // ===== PAY: CAMBIAR MÉTODO =====
+  document.querySelector('.pay-method-change')?.addEventListener('click',()=>{
+    toast('🔜 MercadoPago · Débito · Efectivo próximamente');
+  });
+
+  // ===== NOTIF MODAL: PILLS TODAS/NO LEÍDAS =====
+  document.querySelectorAll('#notifModal .pill').forEach((pill,i)=>{
+    pill.addEventListener('click',()=>{
+      document.querySelectorAll('#notifModal .pill').forEach(p=>p.classList.remove('active'));
+      pill.classList.add('active');
+      const items=document.querySelectorAll('#notifList .notif-item');
+      items.forEach(it=>{ it.style.display=(i===1&&!it.classList.contains('unread'))?'none':''; });
+    });
+  });
+
+  // ===== PERFIL: OPT LIST ACTIONS =====
+  document.querySelectorAll('.opt').forEach(opt=>{
+    const txt = opt.querySelector('.opt-text')?.textContent?.trim();
+    opt.style.cursor='pointer';
+    opt.addEventListener('click',()=>{
+      if(txt==='Mis rutinas') document.querySelector('[data-target="rutinas"]')?.click();
+      else if(txt==='Notificaciones') openNotifPanel();
+      else if(txt==='Pausar racha'){
+        toast('🎯 Comodín activado — racha protegida por 3 días');
+        opt.querySelector('.opt-badge')?.remove();
+        const span=document.createElement('span'); span.className='opt-badge green'; span.textContent='Activado'; opt.insertBefore(span, opt.querySelector('.opt-chev'));
+      }
+      else if(txt==='Mis logros') openLogros();
+      else if(txt==='Contactar al gimnasio') window.open('https://wa.me/59899000000?text=Hola%20PUNTO%20Centro%20Fitness!','_blank');
+      else if(txt==='Cerrar sesión'){
+        if(confirm('¿Cerrar sesión?')){ toast('👋 Hasta la próxima, Gastón'); }
+      }
+    });
+  });
 
   /* ===== Premium Fire Particles (canvas) - DISABLED ===== */
   (function fireParticles(){
