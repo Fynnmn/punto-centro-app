@@ -1704,14 +1704,14 @@
   }
   .racha-ring-lbl{
     font-size:12px;
-    color:var(--ring-lbl-color,#fff);
+    color:var(--ring-lbl-color,#fff) !important;
     margin-top:6px;
     letter-spacing:.04em;
     font-weight:500;
-    text-shadow:var(--ring-lbl-shadow,0 1px 8px rgba(0,0,0,.7),0 1px 3px rgba(0,0,0,.9));
-    background:var(--ring-lbl-bg,rgba(10,10,10,.4));
-    backdrop-filter:var(--ring-lbl-blur,blur(2px));
-    -webkit-backdrop-filter:var(--ring-lbl-blur,blur(2px));
+    text-shadow:var(--ring-lbl-shadow,0 1px 8px rgba(0,0,0,.7),0 1px 3px rgba(0,0,0,.9)) !important;
+    background:var(--ring-lbl-bg,rgba(10,10,10,.4)) !important;
+    backdrop-filter:var(--ring-lbl-blur,blur(2px)) !important;
+    -webkit-backdrop-filter:var(--ring-lbl-blur,blur(2px)) !important;
     padding:3px 10px;
     border-radius:999px;
     display:inline-block;
@@ -2335,7 +2335,6 @@ html, body {
   --cal-border:#E0E0E2;
   --pills-bg:#E8E8EA;
   --pills-border:#DCDCDE;
-  --ring-track:#C8C8CC;
   --ring-lbl-bg:transparent;
   --ring-lbl-color:#5A5A5A;
   --ring-lbl-shadow:none;
@@ -2886,7 +2885,7 @@ html, body {
 .light .cal{background:#fff!important;border-color:#E0E0E2!important}
 
 /* — RACHA: Ring track circle — */
-.ring-track{stroke:var(--ring-track,#1F1F1F)}
+.ring-track{stroke:var(--ring-track,#1F1F1F) !important}
 
 /* — RACHA: Ring label pill — */
 .light .racha-ring-lbl{
@@ -4196,16 +4195,7 @@ html, body {
     // apply to all overlay children
     document.querySelectorAll('.notif-overlay,.hist-overlay').forEach(el=>el.classList.toggle('light',isLight));
     // Direct JS overrides for stubborn dark elements
-    const ringTrack = document.querySelector('.ring-track');
-    if(ringTrack) ringTrack.setAttribute('stroke', isLight ? 'rgba(0,0,0,.09)' : '#1F1F1F');
-    const ringLbl = document.querySelector('.racha-ring-lbl');
-    if(ringLbl){
-      ringLbl.style.background = isLight ? 'transparent' : 'rgba(10,10,10,.4)';
-      ringLbl.style.backdropFilter = isLight ? 'none' : 'blur(2px)';
-      ringLbl.style.webkitBackdropFilter = isLight ? 'none' : 'blur(2px)';
-      ringLbl.style.color = isLight ? '#6A6A6A' : '#fff';
-      ringLbl.style.textShadow = isLight ? 'none' : '0 1px 8px rgba(0,0,0,.7),0 1px 3px rgba(0,0,0,.9)';
-    }
+    // ring-track y ring-lbl manejados 100% por CSS vars con !important
     document.querySelectorAll('.cal').forEach(el=>{
       el.style.background = isLight ? '#fff' : '#141414';
       el.style.borderColor = isLight ? '#E0E0E2' : '#1F1F1F';
