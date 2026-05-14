@@ -1060,8 +1060,8 @@
   .avatar-greet{width:40px;height:40px;font-size:14px;flex-shrink:0}
   .due-alert{
     display:flex;align-items:center;gap:12px;
-    background:#141414;
-    border:1px solid #1F1F1F;
+    background:var(--due-alert-bg,#141414);
+    border:1px solid var(--due-alert-border,#1F1F1F);
     border-left:2px solid #F5A623;
     border-radius:12px;
     padding:14px 16px;
@@ -1074,7 +1074,7 @@
     flex-shrink:0;
     width:36px;height:36px;
     border-radius:10px;
-    background:#1F1F1F;
+    background:var(--due-icon-bg,#1F1F1F);
     display:flex;align-items:center;justify-content:center;
   }
   .due-mid{flex:1;min-width:0}
@@ -2335,15 +2335,18 @@ html, body {
   --cal-border:#E0E0E2;
   --pills-bg:#E8E8EA;
   --pills-border:#DCDCDE;
-  --ring-track:#DCDCDE;
-  --ring-lbl-bg:rgba(0,0,0,.06);
-  --ring-lbl-color:#3A3A3A;
+  --ring-track:#C8C8CC;
+  --ring-lbl-bg:transparent;
+  --ring-lbl-color:#5A5A5A;
   --ring-lbl-shadow:none;
   --ring-lbl-blur:none;
   --stat-cell-bg:#fff;
   --stat-cell-border:#E0E0E2;
   --mini-stat-bg:#fff;
   --mini-stat-border:#E0E0E2;
+  --due-alert-bg:#FFF8F0;
+  --due-alert-border:rgba(245,166,35,.25);
+  --due-icon-bg:#FEF3DC;
 }
 .light .iphone-screen,.light .app,.light .phone{background:var(--bg)!important}
 .light .card,.light .today-card,.light .quick,.light .modal-box,.light .due-alert,.light .stats-card{background:var(--surface)!important;border-color:var(--border)!important}
@@ -2859,6 +2862,15 @@ html, body {
 /* — GLOBAL: section headers & labels — */
 .light .screen-title{color:#0A0A0A!important}
 .light .section-lbl{color:#9A9A9A!important}
+
+/* — BOTONES: btn-outline texto invisible en fondo claro — */
+.light .btn-outline{color:#0A0A0A!important;border-color:#C8C8CC!important}
+.light .btn-outline:hover{background:#F0F0F2!important;border-color:#ACACAE!important}
+
+/* — DUE ALERT: ícono oscuro dentro de la card — */
+.light .due-icon{background:#FEF3DC!important}
+.light .due-t{color:#0A0A0A!important}
+.light .due-s{color:#6A6A6A!important}
 
 /* — PILLS (selector de clases/rutinas) — */
 .light .pills{background:#E8E8EA!important;border-color:#DCDCDE!important}
